@@ -1,17 +1,17 @@
 package com.misoca.textsimulator
 
 import android.graphics.Typeface
-import android.graphics.fonts.FontFamily
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.TypedValue
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.misoca.textsimulator.databinding.MainFragmentBinding
 import kotlinx.android.synthetic.main.main_fragment.*
 
@@ -56,7 +56,25 @@ class MainFragment : Fragment(), LifecycleOwner {
 
     private fun setFontSize(size: String) {
         val textSize = size.toFloatOrNull() ?: return
-        text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+        text.setTextSize(TypedValue.COMPLEX_UNIT_SP, getAdjustedTextSize(textSize))
+    }
+
+    private fun getAdjustedTextSize(textSize: Float): Float {
+        val metrics = DisplayMetrics()
+        activity?.windowManager?.getDefaultDisplay()?.getMetrics(metrics)
+        val dpi = metrics.densityDpi;
+        // Androidで丸められる倍率を取得
+        val adjustedDpi = when {
+            dpi < DisplayMetrics.DENSITY_MEDIUM -> 0.75f
+            dpi < DisplayMetrics.DENSITY_HIGH -> 1f
+            dpi < DisplayMetrics.DENSITY_XHIGH -> 1.5f
+            dpi < DisplayMetrics.DENSITY_XXHIGH -> 2f
+            dpi < DisplayMetrics.DENSITY_XXXHIGH -> 3f
+            else -> 4.00f
+        }
+        val density = resources.displayMetrics.density
+        // 丸められた係数からpxを算出して本来のテキストサイズを返却する
+        return  (textSize * adjustedDpi) / density
     }
 
 }
