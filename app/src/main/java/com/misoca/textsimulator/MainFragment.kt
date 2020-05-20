@@ -37,6 +37,7 @@ class MainFragment : Fragment(), LifecycleOwner {
         viewModel.includeFontPaddingEnabled.observe(this, Observer{ setFont() })
         viewModel.notoSansEnabled.observe(this, Observer{ setFont() })
         viewModel.fontSize.observe(this, Observer{ setFontSize(it) })
+        viewModel.lineSpacing.observe(this, Observer{ setLineSpacing(it) })
         viewModel.sampleText.observe(this, Observer {
             text.text = it
         })
@@ -56,10 +57,15 @@ class MainFragment : Fragment(), LifecycleOwner {
 
     private fun setFontSize(size: String) {
         val textSize = size.toFloatOrNull() ?: return
-        text.setTextSize(TypedValue.COMPLEX_UNIT_SP, getAdjustedTextSize(textSize))
+        text.setTextSize(TypedValue.COMPLEX_UNIT_SP, getAdjustedSize(textSize))
     }
 
-    private fun getAdjustedTextSize(textSize: Float): Float {
+    private fun setLineSpacing(lineSpacing: String) {
+        val lineSpacing = lineSpacing.toFloatOrNull() ?: return
+        text.setLineSpacing(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, lineSpacing,  getResources().getDisplayMetrics()), 1.0f)
+    }
+
+    private fun getAdjustedSize(size: Float): Float {
         val metrics = DisplayMetrics()
         activity?.windowManager?.getDefaultDisplay()?.getMetrics(metrics)
         val dpi = metrics.densityDpi;
@@ -74,7 +80,7 @@ class MainFragment : Fragment(), LifecycleOwner {
         }
         val density = resources.displayMetrics.density
         // 丸められた係数からpxを算出して本来のテキストサイズを返却する
-        return  (textSize * adjustedDpi) / density
+        return  (size * adjustedDpi) / density
     }
 
 }

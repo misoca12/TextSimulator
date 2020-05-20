@@ -27,76 +27,97 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <LinearLayout
+        <ScrollView
             android:id="@+id/right_pane"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="8dp"
+            android:scrollbars="vertical"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/left_pane">
-            <CheckBox
-                android:id="@+id/checkbox_font"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Noto Sans Font Enabled"
-                android:textSize="24sp"
-                android:checked="@={viewModel.notoSansEnabled}"
-                />
-            <CheckBox
-                android:id="@+id/checkbox_include_font_padding"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="includeFontPadding Enabled"
-                android:textSize="24sp"
-                android:checked="@={viewModel.includeFontPaddingEnabled}"
-                />
-            <CheckBox
-                android:id="@+id/checkbox_bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Bold Enabled"
-                android:textSize="24sp"
-                android:checked="@={viewModel.boldEnabled}"
-                />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/sample_text_field"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Sample Text"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:padding="8dp"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/sample_text"
+    >
+                <CheckBox
+                    android:id="@+id/checkbox_font"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Noto Sans Font Enabled"
                     android:textSize="24sp"
-                    android:text="@={viewModel.sampleText}"
-                    android:inputType="text"
-                    android:maxLines="1"
+                    android:checked="@={viewModel.notoSansEnabled}"
                     />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/font_size_field"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Font Size"
-                android:padding="8dp"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/font_size"
+                <CheckBox
+                    android:id="@+id/checkbox_include_font_padding"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="includeFontPadding Enabled"
                     android:textSize="24sp"
-                    android:text="@={viewModel.fontSize}"
-                    android:inputType="number"
+                    android:checked="@={viewModel.includeFontPaddingEnabled}"
                     />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+                <CheckBox
+                    android:id="@+id/checkbox_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bold Enabled"
+                    android:textSize="24sp"
+                    android:checked="@={viewModel.boldEnabled}"
+                    />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/sample_text_field"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Sample Text"
+                    android:padding="8dp"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/sample_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:text="@={viewModel.sampleText}"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/font_size_field"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Font Size"
+                    android:padding="8dp"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/font_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:text="@={viewModel.fontSize}"
+                        android:inputType="number"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/line_spacing_field"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="LineSpacingExtra [sp]"
+                    android:padding="8dp"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/line_spacing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:text="@={viewModel.lineSpacing}"
+                        android:inputType="numberDecimal|numberSigned"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

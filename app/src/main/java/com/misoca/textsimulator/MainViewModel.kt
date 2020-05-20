@@ -9,4 +9,5 @@ class MainViewModel : ViewModel() {
     val boldEnabled: MutableLiveData<Boolean> =  MutableLiveData(false)
     val sampleText: MutableLiveData<String> =  MutableLiveData("Sample Text 1234")
     val fontSize: MutableLiveData<String> =  MutableLiveData("24")
+    val lineSpacing: MutableLiveData<String> =  MutableLiveData("0")
 }
